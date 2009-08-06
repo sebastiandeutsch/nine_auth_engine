@@ -1,0 +1,24 @@
+<h2>Sign in</h2>
+
+<% form_for @user do |form| %>
+	<div class="errors">
+		<%= form.error_messages(:header_message => nil, :message => 'Please correct the following errors and try again:') %>
+	</div>
+	<ul>
+	  <li>
+	    <%= form.label :email %>
+	    <%= form.text_field :email, :class => 'text-field' %>  
+	  </li>
+	  <li>
+	    <%= form.label :password %>
+	    <%= form.password_field :password, :class => 'text-field' %>
+	  </li>
+	  <li>
+	    <%= form.label :password_confirmation %>
+	    <%= form.password_field :password_confirmation, :class => 'text-field' %>
+	  </li>
+	  <li>
+	    <%= form.submit "Sign in", :disable_with => "Please wait..." %>
+	  </li>
+	</ul>
+<% end %>
