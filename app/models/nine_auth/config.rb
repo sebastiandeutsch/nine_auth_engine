@@ -39,7 +39,7 @@ class NineAuth::Config
                  :update_success_flash_message,
                  :password_reset_path, :password_reset_success_flash_message, :password_reset_error_flash_message, :password_reset_mail_subject,
                  :password_update_path, :password_update_success_flash_message, :password_update_error_flash_message,
-                 :password_wrong_toker_error_message,
+                 :password_wrong_toker_error_flash_message,
                  :signin_required_flash_message, :signout_required_flash_message
                  
   def self.layout(layout_name)

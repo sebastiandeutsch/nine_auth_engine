@@ -24,10 +24,10 @@ class NineAuth::PasswordsController < ApplicationController
     @user.password = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation]
     if @user.save
-      flash[:success] = I18n.t(NineAuth::Config.password_reset_success_message, :default => NineAuth::Config.password_reset_success_message)
+      flash[:success] = I18n.t(NineAuth::Config.password_reset_success_flash_message, :default => NineAuth::Config.password_reset_success_flash_message)
       redirect_to NineAuth::Config.password_update_path
     else
-      flash[:error] = I18n.t(NineAuth::Config.password_reset_error_message, :default => NineAuth::Config.password_reset_error_message)
+      flash[:error] = I18n.t(NineAuth::Config.password_reset_error_flash_message, :default => NineAuth::Config.password_reset_error_flash_message)
       render :action => :edit
     end
   end
@@ -36,7 +36,7 @@ class NineAuth::PasswordsController < ApplicationController
     def load_user_using_perishable_token
       @user = User.find_using_perishable_token(params[:id])
       unless @user
-        flash[:error] = I18n.t(NineAuth::Config.password_wrong_toker_error_message, :default => NineAuth::Config.password_wrong_toker_error_message)
+        flash[:error] = I18n.t(NineAuth::Config.password_wrong_toker_error_flash_message, :default => NineAuth::Config.password_wrong_toker_error_flash_message)
         redirect_to :action => :new
       end
     end
