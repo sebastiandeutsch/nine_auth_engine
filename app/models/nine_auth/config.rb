@@ -42,4 +42,17 @@ class NineAuth::Config
                  :password_wrong_toker_error_message,
                  :signin_required_flash_message, :signout_required_flash_message
                  
+  def self.layout(layout_name)
+    NineAuth::PasswordsController.class_eval do
+      layout layout_name
+    end
+
+    NineAuth::UserSessionsController.class_eval do
+      layout layout_name
+    end
+
+    NineAuth::UsersController.class_eval do
+      layout layout_name
+    end
+  end
 end
