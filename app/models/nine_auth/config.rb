@@ -1,5 +1,5 @@
 class NineAuth::Config
-  @@host = 'http://localhost:3000'
+  @@host = 'localhost:3000'
   @@reply = 'dontreply@9elements.com'
 
   @@signup_path = '/'
