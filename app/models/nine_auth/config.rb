@@ -4,14 +4,14 @@ class NineAuth::Config
 
   @@signup_path = '/'
   @@signup_success_flash_message = 'Successfully signed up - please check your email.'
-  @@signup_error_flash_message = 'Signup failed. Please correct the errors.'
+  @@signup_error_flash_message = 'Sign up failed. Please correct the errors.'
 
   @@signin_path = '/'
-  @@signin_success_flash_message = 'Successfully signin.'
-  @@signin_error_flash_message = 'The signin failed. Please check usernamen and password.'
+  @@signin_success_flash_message = 'Successfully signed in.'
+  @@signin_error_flash_message = 'Sign in failed. Please check username and password.'
 
   @@signout_path = '/'
-  @@signout_flash_message = 'Successfully signout.'
+  @@signout_flash_message = 'Successfully signed out.'
   
   @@update_success_flash_message = "Profile succesfully updated."
   
