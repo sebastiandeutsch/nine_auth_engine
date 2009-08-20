@@ -16,10 +16,10 @@ class NineAuth::UsersController < ApplicationController
     # @todo save as block
     # but as of writing this 06.08.09 authlogic is broken
     if @user.save
-      flash[:success] = I18n.t(NineAuth::Config.signup_success_flash_message, :default => NineAuth::Config.signup_success_flash_message)
-      redirect_to NineAuth::Config.signup_path
+      flash[:success] = I18n.t(NineAuthEngine.configuration.signup_success_flash_message, :default => NineAuthEngine.configuration.signup_success_flash_message)
+      redirect_to NineAuthEngine.configuration.signup_path
     else
-      flash[:success] = I18n.t(NineAuth::Config.signup_error_flash_message, :defaukt => NineAuth::Config.signup_error_flash_message)
+      flash[:success] = I18n.t(NineAuthEngine.configuration.signup_error_flash_message, :defaukt => NineAuthEngine.configuration.signup_error_flash_message)
       render :action => 'new'
     end
   end
@@ -33,7 +33,7 @@ class NineAuth::UsersController < ApplicationController
     # but as of writing this 06.08.09 authlogic is broken
     @user = current_user
     if @user.update_attributes(params[:user])
-      flash[:success] = I18n.t(NineAuth::Config.update_success_flash_message, :default => NineAuth::Config.update_success_flash_message)
+      flash[:success] = I18n.t(NineAuthEngine.configuration.update_success_flash_message, :default => NineAuthEngine.configuration.update_success_flash_message)
       redirect_to :action => 'show'
     else
       render :action => 'edit'
