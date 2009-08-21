@@ -19,21 +19,31 @@ module NineAuthEngine
   class Configuration
     attr_accessor :host, :reply,
                   :signup_path, :signup_success_flash_message, :signup_error_flash_message,
+                  :signup_disabled_path, :signup_disabled_flash_message,
                   :signin_path, :signin_success_flash_message, :signin_error_flash_message,
                   :signout_path, :signout_flash_message,
                   :update_success_flash_message,
                   :password_reset_path, :password_reset_success_flash_message, :password_reset_error_flash_message, :password_reset_mail_subject,
                   :password_update_path, :password_update_success_flash_message, :password_update_error_flash_message,
                   :password_wrong_toker_error_flash_message,
-                  :signin_required_flash_message, :signout_required_flash_message
+                  :signin_required_flash_message, :signout_required_flash_message,
+                  :layout, :double_opt_in, :disable_signup
+                  
                    
     def initialize()  
       @host = 'localhost:3000'
       @reply = 'dontreply@9elements.com'
+      
+      @layout = ''
+      @double_opt_in = true
+      @disable_signup = false
 
       @signup_path = '/'
       @signup_success_flash_message = 'Successfully signed up - please check your email.'
       @signup_error_flash_message = 'Sign up failed. Please correct the errors.'
+
+      @signup_disabled_path = '/'
+      @signup_disabled_flash_message = 'The sign up is disabled.'
 
       @signin_path = '/'
       @signin_success_flash_message = 'Successfully signed in.'
@@ -63,6 +73,8 @@ module NineAuthEngine
     end    
     
     def layout(layout_name)
+      @layout = layout_name
+      
       NineAuth::PasswordsController.class_eval do
         layout layout_name
       end

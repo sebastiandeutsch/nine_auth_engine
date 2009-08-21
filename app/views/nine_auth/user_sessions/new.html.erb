@@ -21,9 +21,11 @@
 <% end %>
 
 <ul>
-  <li>
-    <%= link_to "Sign up", new_user_path %>
-  </li>
+  <% if not NineAuthEngine.configuration.disable_signup %>
+    <li>
+	  <%= link_to "Sign up", new_user_path %>
+    </li>
+  <% end %>
   <li>
     <%= link_to "Forgot password?", new_password_path %>
   </li>
