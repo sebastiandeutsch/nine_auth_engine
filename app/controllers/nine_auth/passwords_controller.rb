@@ -9,7 +9,7 @@ class NineAuth::PasswordsController < ApplicationController
     @user = User.find_by_email(params[:email])
     if @user
       @user.deliver_password_reset_instructions!
-      flash[:success] = "#{I18n.t(NineAuthEngine.configuration.password_reset_success_flash_message, :default => NineAuthEngine.configuration.password_reset_success_flash_message)} #{@user.email}" 
+      flash[:success] = "#{I18n.t(NineAuthEngine.configuration.password_reset_success_flash_message, :default => NineAuthEngine.configuration.password_reset_success_flash_message)}#{@user.email}" 
       redirect_to NineAuthEngine.configuration.password_reset_path
     else
       flash[:error] = I18n.t(NineAuthEngine.configuration.password_reset_error_flash_message, :default => NineAuthEngine.configuration.password_reset_error_flash_message)
@@ -36,8 +36,10 @@ class NineAuth::PasswordsController < ApplicationController
     def load_user_using_perishable_token
       @user = User.find_using_perishable_token(params[:id])
       unless @user
-        flash[:error] = I18n.t(NineAuthEngine.configuration.password_wrong_toker_error_flash_message, :default => NineAuthEngine.configuration.password_wrong_toker_error_flash_message)
+        flash[:error] = I18n.t(NineAuthEngine.configuration.password_wrong_token_error_flash_message, :default => NineAuthEngine.configuration.password_wrong_token_error_flash_message)
         redirect_to :action => :new
+        false
       end
+      true
     end
 end

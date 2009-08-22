@@ -5,10 +5,11 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :passwords,                    :controller => 'nine_auth/passwords'
   
-  map.signup  'signup',                        :controller => 'nine_auth/users', :action => 'new'
-  map.profile 'profile',                       :controller => 'nine_auth/users', :action => 'show'
+  map.signup        'signup',                  :controller => 'nine_auth/users',         :action => 'new'
+  map.profile       'profile',                 :controller => 'nine_auth/users',         :action => 'show'
+  map.confirm_email 'confirm_email/:id',       :controller => 'nine_auth/users',         :action => 'confirm_email'
   
-  map.forgotten_password 'forgotten_password', :controller => 'nine_auth/passwords', :action => 'new'
+  map.forgotten_password 'forgotten_password', :controller => 'nine_auth/passwords',     :action => 'new'
 
   map.signin  'signin',                        :controller => 'nine_auth/user_sessions', :action => 'new'
   map.signout 'signout',                       :controller => 'nine_auth/user_sessions', :action => 'destroy'

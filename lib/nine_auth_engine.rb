@@ -25,11 +25,11 @@ module NineAuthEngine
                   :update_success_flash_message,
                   :password_reset_path, :password_reset_success_flash_message, :password_reset_error_flash_message, :password_reset_mail_subject,
                   :password_update_path, :password_update_success_flash_message, :password_update_error_flash_message,
-                  :password_wrong_toker_error_flash_message,
+                  :password_wrong_token_error_flash_message,
                   :signin_required_flash_message, :signout_required_flash_message,
+                  :email_confirmation_mail_subject, :email_confirmation_success_flash_message, :email_confirmation_error_flash_message,
                   :layout, :double_opt_in, :disable_signup
                   
-                   
     def initialize()  
       @host = 'localhost:3000'
       @reply = 'dontreply@9elements.com'
@@ -58,12 +58,16 @@ module NineAuthEngine
       @password_reset_success_flash_message = "Instructions to reset your password have been emailed to "
       @password_reset_error_flash_message = "No user was found with that email address"
       @password_reset_mail_subject = "Password reset instructions"
-
+      
+      @email_confirmation_mail_subject = "Email confirmation"
+      @email_confirmation_success_flash_message = "Your email has been verified"
+      @email_confirmation_error_flash_message = "Something went wrong - Your email has not been verified"
+      
       @password_update_path = '/profile'
       @password_update_success_flash_message = "Password successfully updated"
       @password_update_error_flash_message = "Something went wrong, password not updated"
 
-      @password_wrong_toker_error_message = "We're sorry, but we could not locate your account." +
+      @password_wrong_token_error_flash_message = "We're sorry, but we could not locate your account." +
         "If you are having issues try copying and pasting the URL " +
         "from your email into your browser or restarting the " +
         "reset password process."
