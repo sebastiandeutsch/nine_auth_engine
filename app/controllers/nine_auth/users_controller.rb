@@ -1,7 +1,7 @@
 class NineAuth::UsersController < ApplicationController
   before_filter :check_if_signup_is_disabled, :only => [:new, :create]
   before_filter :require_user, :only => [:show, :edit]
-  before_filter :load_user_using_perishable_token, :only => [:confirm_email]
+  before_filter :load_user_using_perishable_token, :only => [:email_confirmation]
   
   def new
     @user = User.new
@@ -27,7 +27,7 @@ class NineAuth::UsersController < ApplicationController
     end
   end
   
-  def confirm_email
+  def email_confirmation
     @user.active = true
     if @user.save
       flash[:success] = I18n.t(NineAuthEngine.configuration.email_confirmation_success_flash_message, :default => NineAuthEngine.configuration.email_confirmation_success_flash_message)
