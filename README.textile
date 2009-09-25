@@ -6,25 +6,35 @@ h1. Installation
 
 First you install the plugin e.g. using git
 
- git submodule add git://github.com/sebastiandeutsch/nine_auth_engine.git vendor/plugins/nine_auth_engine
+<pre>
+git submodule add git://github.com/sebastiandeutsch/nine_auth_engine.git vendor/plugins/nine_auth_engine
+</pre>
 
 Then you get the migration file for the user model
 
- rake nine_auth_engine:sync
+<pre>
+rake nine_auth_engine:sync
+</pre>
 
-Now you gonna put authlogic to your environment.rb
+Now you gonna put authlogic to your <code>environment.rb</code>
 
- config.gem 'binarylogic-authlogic',
-   :lib     => 'authlogic',
-   :source  => 'http://gems.github.com'
+<pre>
+config.gem 'binarylogic-authlogic',
+  :lib     => 'authlogic',
+  :source  => 'http://gems.github.com'
+</pre>
 
 And add the module to your ApplicationController
 
- include NineAuthEngine::Authentication
+<pre>
+include NineAuthEngine::Authentication
+</pre>
 
 To protect certain actions simply add an
 
- before_filter :require_user
+<pre>
+before_filter :require_user
+</pre>
 
 to your controller.
 
