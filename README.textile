@@ -1,10 +1,8 @@
-NineAuthEngine
-==============
+h1. NineAuthEngine
 
 NineAuth Engine is - as the name says - an engine for authentication. Using Binary Logics authentication plugin.
 
-Installation
-============
+h1. Installation
 
 First you install the plugin e.g. using git
 
