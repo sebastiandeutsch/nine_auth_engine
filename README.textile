@@ -62,7 +62,7 @@ h1. Advanced Configuration
 If you want to override specific behaviour you just have to copy paste the sections from the plugin (models/views) and add whatever you want to add.
 
 <pre>
-class User &lt; ActiveRecord::Base
+class User < ActiveRecord::Base
   acts_as_authentic
   
   validates_presence_of :email
