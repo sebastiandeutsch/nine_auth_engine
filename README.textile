@@ -26,20 +26,21 @@ config.gem 'binarylogic-authlogic',
   :source  => 'http://gems.github.com'
 </pre>
 
-and besides sugar some configuration
+and besides sugar some configuration within your config block
 
 <pre>
 # Configure NineAuth
 config.to_prepare do
-NineAuthEngine.configure do |config|
-  config.after_signup_redirect = '/signin/'
-  config.after_signin_redirect = '/'
-  config.after_signout_redirect = '/signin/'
-  config.after_password_reset_redirect = '/signin/'
-  config.after_password_update_redirect = '/'
-  config.after_signup_disabled_redirect = '/signin/'
-  config.disable_signup = false
-  config.layout("application")
+  NineAuthEngine.configure do |config|
+    config.after_signup_redirect = '/signin/'
+	config.after_signin_redirect = '/'
+	config.after_signout_redirect = '/signin/'
+	config.after_password_reset_redirect = '/signin/'
+	config.after_password_update_redirect = '/'
+	config.after_signup_disabled_redirect = '/signin/'
+	config.disable_signup = false
+	config.layout("application")
+  end
 end
 </pre>
 
@@ -83,5 +84,12 @@ class User < ActiveRecord::Base
   end
 end
 </pre>
+
+h1. Gotchas
+
+F: Oh man, your engine sucks - I just installed/started and signed up, but I can't sign in.
+A: Yes we're on double opt in, so check your mails and don't forget to configure ActiveMailer.
+
+h1. Rechtsanwalt
 
 Copyright (c) 2009 9elements, released under the MIT license
