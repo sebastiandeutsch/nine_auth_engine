@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  unloabable
   
   acts_as_authentic
   

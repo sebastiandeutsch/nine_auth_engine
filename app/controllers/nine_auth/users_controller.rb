@@ -20,7 +20,7 @@ class NineAuth::UsersController < ApplicationController
     if @user.save
       @user.deliver_email_confirmation_instructions! if NineAuthEngine.configuration.double_opt_in
       flash[:success] = I18n.t(NineAuthEngine.configuration.signup_success_flash_message, :default => NineAuthEngine.configuration.signup_success_flash_message)
-      redirect_to NineAuthEngine.configuration.signup_path
+      redirect_to NineAuthEngine.configuration.after_signup_redirect
     else
       flash[:error] = I18n.t(NineAuthEngine.configuration.signup_error_flash_message, :default => NineAuthEngine.configuration.signup_error_flash_message)
       render :action => 'new'
@@ -31,7 +31,7 @@ class NineAuth::UsersController < ApplicationController
     @user.active = true
     if @user.save
       flash[:success] = I18n.t(NineAuthEngine.configuration.email_confirmation_success_flash_message, :default => NineAuthEngine.configuration.email_confirmation_success_flash_message)
-      redirect_to NineAuthEngine.configuration.password_update_path
+      redirect_to NineAuthEngine.configuration.after_password_update_redirect
     else
       flash[:error] = I18n.t(NineAuthEngine.configuration.email_confirmation_error_flash_message, :default => NineAuthEngine.configuration.email_confirmation_error_flash_message)
       render :action => :edit
@@ -58,7 +58,7 @@ private
   def check_if_signup_is_disabled
     if NineAuthEngine.configuration.disable_signup
       flash[:error] = I18n.t(NineAuthEngine.configuration.signup_disabled_flash_message, :default => NineAuthEngine.configuration.signup_disabled_flash_message)
-      redirect_to NineAuthEngine.configuration.signup_disabled_path
+      redirect_to NineAuthEngine.configuration.after_signup_disabled_redirect
       false
     else
       true

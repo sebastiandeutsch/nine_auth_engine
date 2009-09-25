@@ -14,7 +14,7 @@ class NineAuth::UserSessionsController < ApplicationController
     @user_session.save do |result|
       if result
         flash[:success] = I18n.t(NineAuthEngine.configuration.signin_success_flash_message, :default => NineAuthEngine.configuration.signin_success_flash_message)
-        redirect_to NineAuthEngine.configuration.signin_path
+        redirect_to NineAuthEngine.configuration.after_signin_redirect
       else
         flash[:error] = I18n.t(NineAuthEngine.configuration.signin_error_flash_message, :default => NineAuthEngine.configuration.signin_error_flash_message)
         render :action => 'new'
@@ -26,7 +26,7 @@ class NineAuth::UserSessionsController < ApplicationController
     @user_session = UserSession.find
     @user_session.destroy
     flash[:success] = I18n.t(NineAuthEngine.configuration.signout_flash_message, :default => NineAuthEngine.configuration.signout_flash_message)
-    redirect_to NineAuthEngine.configuration.signout_path
+    redirect_to NineAuthEngine.configuration.after_signout_redirect
   end
 
 end

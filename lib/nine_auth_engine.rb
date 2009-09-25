@@ -18,13 +18,13 @@ module NineAuthEngine
   
   class Configuration
     attr_accessor :host, :reply,
-                  :signup_path, :signup_success_flash_message, :signup_error_flash_message,
-                  :signup_disabled_path, :signup_disabled_flash_message,
-                  :signin_path, :signin_success_flash_message, :signin_error_flash_message,
-                  :signout_path, :signout_flash_message,
+                  :after_signup_redirect, :signup_success_flash_message, :signup_error_flash_message,
+                  :after_signup_disabled_redirect, :signup_disabled_flash_message,
+                  :after_signin_redirect, :signin_success_flash_message, :signin_error_flash_message,
+                  :after_signout_redirect, :signout_flash_message,
                   :update_success_flash_message,
-                  :password_reset_path, :password_reset_success_flash_message, :password_reset_error_flash_message, :password_reset_mail_subject,
-                  :password_update_path, :password_update_success_flash_message, :password_update_error_flash_message,
+                  :after_password_reset_redirect, :password_reset_success_flash_message, :password_reset_error_flash_message, :password_reset_mail_subject,
+                  :after_password_update_redirect, :password_update_success_flash_message, :password_update_error_flash_message,
                   :password_wrong_token_error_flash_message,
                   :signin_required_flash_message, :signout_required_flash_message,
                   :email_confirmation_mail_subject, :email_confirmation_success_flash_message, :email_confirmation_error_flash_message,
@@ -38,23 +38,23 @@ module NineAuthEngine
       @double_opt_in = true
       @disable_signup = false
 
-      @signup_path = '/'
+      @after_signup_redirect = '/'
       @signup_success_flash_message = 'Successfully signed up - please check your email.'
       @signup_error_flash_message = 'Sign up failed. Please correct the errors.'
 
-      @signup_disabled_path = '/'
+      @after_signup_disabled_redirect = '/'
       @signup_disabled_flash_message = 'The sign up is disabled.'
 
-      @signin_path = '/'
+      @after_signin_redirect = '/'
       @signin_success_flash_message = 'Successfully signed in.'
       @signin_error_flash_message = 'Sign in failed. Please check username and password.'
 
-      @signout_path = '/'
+      @after_signout_redirect = '/'
       @signout_flash_message = 'Successfully signed out.'
 
       @update_success_flash_message = "Profile succesfully updated."
 
-      @password_reset_path = '/'
+      @after_password_reset_redirect = '/'
       @password_reset_success_flash_message = "Instructions to reset your password have been emailed to "
       @password_reset_error_flash_message = "No user was found with that email address"
       @password_reset_mail_subject = "Password reset instructions"
@@ -63,7 +63,7 @@ module NineAuthEngine
       @email_confirmation_success_flash_message = "Your email has been verified"
       @email_confirmation_error_flash_message = "Something went wrong - Your email has not been verified"
       
-      @password_update_path = '/profile'
+      @after_password_update_redirect = '/profile'
       @password_update_success_flash_message = "Password successfully updated"
       @password_update_error_flash_message = "Something went wrong, password not updated"
 

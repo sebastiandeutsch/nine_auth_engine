@@ -10,7 +10,7 @@ class NineAuth::PasswordsController < ApplicationController
     if @user
       @user.deliver_password_reset_instructions!
       flash[:success] = "#{I18n.t(NineAuthEngine.configuration.password_reset_success_flash_message, :default => NineAuthEngine.configuration.password_reset_success_flash_message)}#{@user.email}" 
-      redirect_to NineAuthEngine.configuration.password_reset_path
+      redirect_to NineAuthEngine.configuration.after_password_reset_redirect
     else
       flash[:error] = I18n.t(NineAuthEngine.configuration.password_reset_error_flash_message, :default => NineAuthEngine.configuration.password_reset_error_flash_message)
       render :action => :new
@@ -25,7 +25,7 @@ class NineAuth::PasswordsController < ApplicationController
     @user.password_confirmation = params[:user][:password_confirmation]
     if @user.save
       flash[:success] = I18n.t(NineAuthEngine.configuration.password_update_success_flash_message, :default => NineAuthEngine.configuration.password_update_success_flash_message)
-      redirect_to NineAuthEngine.configuration.password_update_path
+      redirect_to NineAuthEngine.configuration.after_password_update_redirect
     else
       flash[:error] = I18n.t(NineAuthEngine.configuration.password_update_error_flash_message, :default => NineAuthEngine.configuration.password_update_error_flash_message)
       render :action => :edit
