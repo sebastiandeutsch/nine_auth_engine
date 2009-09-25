@@ -85,6 +85,19 @@ class User < ActiveRecord::Base
 end
 </pre>
 
+h1. Snippets
+
+View snippet for signin and signout:
+
+<pre>
+<% if current_user %>
+  <%=h current_user.email %>
+  <%= link_to 'signout', user_sessions_path, :method => 'delete' %>
+<% else %>
+  <%= link_to 'signin', new_user_sessions_path %>
+<% end %>
+</pre>
+
 h1. Tests?
 
 Sure just take a look in the <code>features</code> folder, a lot of cucumber tests will be there. Just
