@@ -33,13 +33,13 @@ and besides sugar some configuration within your config block
 config.to_prepare do
   NineAuthEngine.configure do |config|
     config.after_signup_redirect = '/signin/'
-	config.after_signin_redirect = '/'
-	config.after_signout_redirect = '/signin/'
-	config.after_password_reset_redirect = '/signin/'
-	config.after_password_update_redirect = '/'
-	config.after_signup_disabled_redirect = '/signin/'
-	config.disable_signup = false
-	config.layout("application")
+    config.after_signin_redirect = '/'
+    config.after_signout_redirect = '/signin/'
+    config.after_password_reset_redirect = '/signin/'
+    config.after_password_update_redirect = '/'
+    config.after_signup_disabled_redirect = '/signin/'
+    config.disable_signup = false
+    config.layout("application")
   end
 end
 </pre>
@@ -84,6 +84,13 @@ class User < ActiveRecord::Base
   end
 end
 </pre>
+
+h1. Tests?
+
+Sure just take a look in the <code>features</code> folder, a lot of cucumber tests will be there. Just
+take them to your testing ground and make them compliant to your application.
+
+Note: We took the testsuite from Thouhtbots "Clearance":http://github.com/thoughtbot/clearance/ and migrated it to our engine. Thanks to the thoughtbot team for that.
 
 h1. Gotchas
 
