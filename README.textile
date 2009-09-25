@@ -1,0 +1,33 @@
+NineAuthEngine
+==============
+
+NineAuth Engine is - as the name says - an engine for authentication. Using Binary Logics authentication plugin.
+
+Installation
+============
+
+First you install the plugin e.g. using git
+
+ git submodule add git://github.com/sebastiandeutsch/nine_auth_engine.git vendor/plugins/nine_auth_engine
+
+Then you get the migration file for the user model
+
+ rake nine_auth_engine:sync
+
+Now you gonna put authlogic to your environment.rb
+
+ config.gem 'binarylogic-authlogic',
+   :lib     => 'authlogic',
+   :source  => 'http://gems.github.com'
+
+And add the module to your ApplicationController
+
+ include NineAuthEngine::Authentication
+
+To protect certain actions simply add an
+
+ before_filter :require_user
+
+to your controller.
+
+Copyright (c) 2009 9elements, released under the MIT license
