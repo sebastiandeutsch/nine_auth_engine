@@ -27,8 +27,12 @@ module NineAuthEngine
                   :after_password_update_redirect, :password_update_success_flash_message, :password_update_error_flash_message,
                   :password_wrong_token_error_flash_message,
                   :signin_required_flash_message, :signout_required_flash_message,
+                  :admin_rights_required_flash_message,
                   :email_confirmation_mail_subject, :email_confirmation_success_flash_message, :email_confirmation_error_flash_message,
-                  :layout, :double_opt_in, :disable_signup
+                  :create_user_success_flash_message, :create_user_error_flash_message,
+                  :layout, :double_opt_in, :disable_signup,
+                  :backend_namespace,
+                  :account_created_mail_subject
                   
     def initialize()  
       @host = 'localhost:3000'
@@ -62,6 +66,7 @@ module NineAuthEngine
       @email_confirmation_mail_subject = "Email confirmation"
       @email_confirmation_success_flash_message = "Your email has been verified"
       @email_confirmation_error_flash_message = "Something went wrong - Your email has not been verified"
+      @account_created_mail_subject = "Your account has been created"
       
       @after_password_update_redirect = '/profile'
       @password_update_success_flash_message = "Password successfully updated"
@@ -74,6 +79,13 @@ module NineAuthEngine
 
       @signin_required_flash_message = "You must be logged in to access this page"
       @signout_required_flash_message = "You must be logged out to access this page"
+      
+      @admin_rights_required_flash_message = "You must have admin rights to access this page"
+      
+      @create_user_success_flash_message = "The user has been successfully created."
+      @create_user_error_flash_message = "Could not create user. Please correct the errors."
+      
+      @backend_namespace = "backend"
     end    
     
     def layout(layout_name)
@@ -88,6 +100,10 @@ module NineAuthEngine
       end
 
       NineAuth::UsersController.class_eval do
+        layout layout_name
+      end
+      
+      NineAuth::Backend::UsersController.class_eval do
         layout layout_name
       end
     end
@@ -140,6 +156,15 @@ module NineAuthEngine
         unless current_user
           store_location
           flash[:error] = I18n.t(NineAuthEngine.configuration.signin_required_flash_message, :default => NineAuthEngine.configuration.signin_required_flash_message)
+          redirect_to new_user_sessions_path
+          return false
+        end
+      end
+      
+      def require_admin
+        unless current_user and current_user.admin
+          store_location
+          flash[:error] = I18n.t(NineAuthEngine.configuration.admin_rights_required_flash_message, :default => NineAuthEngine.configuration.admin_rights_required_flash_message)
           redirect_to new_user_sessions_path
           return false
         end

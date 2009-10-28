@@ -3,6 +3,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users,                        :controller => 'nine_auth/users'
   map.resource  :user_sessions,                :controller => 'nine_auth/user_sessions', :only => [ :new, :create, :destroy ]
   
+  # map.resources :backend,                      :controller => 'nine_auth/backend'
+  
+
+  map.with_options(:path_prefix => NineAuthEngine.configuration.backend_namespace, :name_prefix => 'backend_', :controller => 'backend') do |backend|
+    backend.resources :users,                  :controller => 'nine_auth/backend/users'
+  end
+  
   map.resources :passwords,                    :controller => 'nine_auth/passwords'
   
   map.signup             'signup',                 :controller => 'nine_auth/users', :action => 'new'
