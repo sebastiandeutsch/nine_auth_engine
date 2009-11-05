@@ -1,6 +1,6 @@
-<h2>Sign up</h2>
+<h2>Edit user</h2>
 
-<% form_for @user do |form| %>
+<% form_for @user, :url => { :controller => 'backend/users', :action => 'update' } do |form| %>
 	<div class="errors">
 		<%= form.error_messages(:header_message => nil, :message => 'Please correct the following errors and try again:') %>
 	</div>
@@ -17,8 +17,19 @@
 	    <%= form.label :password_confirmation %>
 	    <%= form.password_field :password_confirmation, :class => 'text-field' %>
 	  </li>
+		<li>
+	    <%= form.label :admin %>
+	    <%= form.check_box :admin %>
+	  </li>
+		<li>
+	    <%= form.label :active %>
+	    <%= form.check_box :active %>
+	  </li>
+		<li>
+			
+		</li>
 	  <li>
-	    <%= form.submit "Sign in" %>
+	    <%= form.submit "Update", :disable_with => "Please wait..." %>
 	  </li>
 	</ul>
 <% end %>

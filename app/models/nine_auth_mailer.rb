@@ -16,4 +16,12 @@ class NineAuthMailer < ActionMailer::Base
     sent_on       Time.now
     body          :edit_password_reset_url => edit_password_url(user.perishable_token)
   end
+  
+  def account_created_instructions(user, password)
+    subject       NineAuthEngine.configuration.account_created_mail_subject
+    from          "<#{NineAuthEngine.configuration.reply}>"
+    recipients    user.email
+    sent_on       Time.now
+    body          :user => user, :password => password
+  end
 end

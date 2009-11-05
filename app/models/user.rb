@@ -13,4 +13,9 @@ class User < ActiveRecord::Base
     NineAuthMailer.deliver_password_reset_instructions(self)  
   end
   
+  def deliver_account_created_instructions(password)!  
+    reset_perishable_token!  
+    NineAuthMailer.deliver_account_created_instructions(self, password)  
+  end
+  
 end
