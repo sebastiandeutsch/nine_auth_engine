@@ -11,11 +11,11 @@
 	    <%= form.password_field :password, :class => 'text-field' %>
 	  </li>
 	  <li>
-	    <%= form.check_box :remember_me %>
-	    <%= form.label :remember_me %>
+	    <%= form.check_box(:remember_me) %>
+		<%= form.label :remember_me, 'Remember me', :class => 'inline' %>
 	  </li>
 	  <li>
-	    <%= form.submit "Sign in", :disable_with => "Please wait..." %>
+	    <%= form.submit "Sign in" %>
 	  </li>
 	</ul>
 <% end %>
