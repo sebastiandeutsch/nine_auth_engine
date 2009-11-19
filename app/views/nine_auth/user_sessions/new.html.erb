@@ -2,20 +2,27 @@
 
 <% form_for @user_session do |form| %>
 	<ul>
-	  <li>
-	    <%= form.label :email %>
-	    <%= form.text_field :email, :class => 'text-field' %>  
-	  </li>
+	  <% if not User.login_field.nil? %>
+	    <li>
+	      <%= form.label User.login_field %>
+	      <%= form.text_field User.login_field, :class => 'text-field' %>  
+	    </li>
+	  <% else %>
+	    <li>
+	      <%= form.label :email %>
+	      <%= form.text_field :email, :class => 'text-field' %>  
+	    </li>
+	  <% end %>
 	  <li>
 	    <%= form.label :password %>
 	    <%= form.password_field :password, :class => 'text-field' %>
 	  </li>
 	  <li>
-	    <%= form.check_box(:remember_me) %>
-		<%= form.label :remember_me, 'Remember me', :class => 'inline' %>
+	    <%= form.check_box :remember_me %>
+	    <%= form.label :remember_me %>
 	  </li>
 	  <li>
-	    <%= form.submit "Sign in" %>
+	    <%= form.submit "Sign in", :disable_with => "Please wait..." %>
 	  </li>
 	</ul>
 <% end %>

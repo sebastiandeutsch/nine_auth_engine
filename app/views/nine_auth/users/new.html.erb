@@ -5,6 +5,12 @@
 		<%= form.error_messages(:header_message => nil, :message => 'Please correct the following errors and try again:') %>
 	</div>
 	<ul>
+	  <% if not User.login_field.nil? %>
+	    <li>
+	      <%= form.label User.login_field %>
+	      <%= form.text_field User.login_field, :class => 'text-field' %>  
+	    </li>
+	  <% end %>
 	  <li>
 	    <%= form.label :email %>
 	    <%= form.text_field :email, :class => 'text-field' %>  
@@ -18,7 +24,7 @@
 	    <%= form.password_field :password_confirmation, :class => 'text-field' %>
 	  </li>
 	  <li>
-	    <%= form.submit "Sign in" %>
+	    <%= form.submit "Sign in", :disable_with => "Please wait..." %>
 	  </li>
 	</ul>
 <% end %>
