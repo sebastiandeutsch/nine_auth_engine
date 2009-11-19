@@ -181,4 +181,46 @@ module NineAuthEngine
       
     end # /InstanceMethods
   end # /Authentication
+  
+  module User
+    def self.included(model)
+
+      model.class_eval do
+        acts_as_authentic
+        
+        if not self.login_field.nil?
+          validates_presence_of self.login_field
+        end
+
+        validates_presence_of :email
+      end
+
+      model.extend(ClassMethods)
+      model.send(:include, InstanceMethods)
+    end
+    
+    module InstanceMethods
+      def deliver_email_confirmation_instructions!  
+        reset_perishable_token!  
+        NineAuthMailer.deliver_email_confirmation_instructions(self)  
+      end
+
+      def deliver_password_reset_instructions!  
+        reset_perishable_token!  
+        NineAuthMailer.deliver_password_reset_instructions(self)  
+      end
+    end
+    
+    module ClassMethods
+      def find_by_username_or_email(login)
+        user = nil
+        if not self.login_field.nil?
+          user = self.find(:first, :conditions => [ "#{self.login_field} = ?", login]) || self.find_by_email(login)
+        else
+          user = self.find_by_email(login)
+        end
+        user
+      end
+    end
+  end
 end
