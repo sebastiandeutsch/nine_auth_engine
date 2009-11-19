@@ -8,7 +8,7 @@ namespace :nine_auth_engine do
     migrations_sync_target = File.join(RAILS_ROOT, 'db', 'migrate')
     
     # Copy DB migrations
-    puts "Copying migrations to db/migrate"
+    puts "Synchronize nine_auth migrations with the root application"
     FileUtils.cp_r(vrame_migrations, migrations_sync_target)
   end
 end
