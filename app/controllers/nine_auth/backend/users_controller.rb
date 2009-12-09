@@ -27,7 +27,7 @@ class NineAuth::Backend::UsersController < ApplicationController
     # @todo save as block
     # but as of writing this 06.08.09 authlogic is broken
     if @user.save
-        @user.deliver_account_created_instructions(params[:user][:password]) if params[:send_mail]
+        @user.deliver_account_created_instructions(params[:user][:password]) if params[:send_mail] == "1"
         flash[:success] = I18n.t(NineAuthEngine.configuration.create_user_success_flash_message, :default => NineAuthEngine.configuration.create_user_success_flash_message)
         redirect_to backend_users_path
     else
